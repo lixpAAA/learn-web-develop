@@ -35,19 +35,18 @@
     for (; index < length; ++index) {
       if ((option = arguments[index]) !== null && toString.call(option) === '[object Object]') {
         for (name in option) {
-
           copy = option[name]
           src = target[name]
           if (deep && (jQuery.isObject(copy) || (isArrayFlag = jQuery.isArray(copy)))) {
             if (isArrayFlag) {
               isArrayFlag = false
-              clone = src && jQuery.isArray(src) ? src : []
+              // clone = src && jQuery.isArray(src) ? src : []
+              target[name] = copy
 
             } else {
               clone = src && jQuery.isObject(src) ? src : {}
+              target[name] = jQuery.extend(deep, clone, copy)
             }
-            target[name] = jQuery.extend(deep, clone, copy)
-
           } else if (copy !== undefined) {
             target[name] = copy
           }
