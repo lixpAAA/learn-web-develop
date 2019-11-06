@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Document</title>
+    <style>
+        body{
+            margin: 0;
+        }
+        html,
+        body{
+            height: 100%;
+        }
+        header,footer{
+            width: 100%;
+            height: 40px;
+            position: absolute;
+            left: 0;
+            text-align: center;
+            line-height: 40px;
+            background: #999999;
+            color: white;
+            z-index: 999;
+        }
+        header{
+            top:0;
+        }
+        footer{
+            bottom: 0;
+        }
+        ul{
+            display: block;
+            width: 100%;
+            position: absolute;
+            top: 40px;
+            bottom: 40px;
+            overflow: auto;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            transition: all 0.5s;
+        }
+        ul>li{
+            width: 100%;
+            height: 40px;
+            line-height: 40px;
+            text-indent: 20px;
+            border-bottom: 1px solid #666666;
+            color: #333333;
+        }
+        #loading{
+            width: 100%;
+            height: 40px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1;
+            line-height: 40px;
+            text-align: center;
+            color: #ffffff;
+            transition: all 0.5s;
+            background: orange;
+        }
+    </style> 
+</head>
+
+<body>
+   <header>
+       我是header
+   </header>
+   <section>
+        <div id="loading">加载中...</div>
+        <ul id="list"></ul>
+   </section>
+   <footer>
+        我是footer
+   </footer>
+</body>
+<script>
+    var list = document.getElementById("list");
+    var loading = document.getElementById("loading");
+    //获取数据
+    function getData(){
+        var html = "";
+        for(var i =0; i < 20; i++){
+            html += "<li>我是第"+(i+1)+"个li</li>"
+        }
+        var len = list.children.length;
+        if(len === 0){
+            list.innerHTML = html;
+        }else if(len > 0 && len < 100){
+            var newHtml = parseDom(html);
+            insertAfter(newHtml,list.children[len - 1]);
+        }else if(len === 100){
+            console.log("已经全部加载完了");
+        }
+       
+    }
+    //字符串dom化
+    function parseDom(arg){
+        var objEle = document.createElement("div");
+        objEle.innerHTML = arg;
+        return [...objEle.childNodes]
+    }
+    //在已有元素后插入元素
+    function insertAfter(newEle,targetEle){
+        newEle.forEach(element => {
+            //after:在元素后插入元素 IE9及以上
+            targetEle.after(element);
+        });
+    }
+
+    window.onload = () =>{
+        getData();
+        list.addEventListener("scroll",function(){
+           //ul的高度  随着机型不同而不同 页面初始加载定死
+           var listH = list.clientHeight;
+           //所有li的高度
+           var contentH = this.childNodes.length * 41;
+           //ul的高度与li总高度之差
+           var diffValue = contentH - listH;
+
+           if(this.scrollTop + 50 >= diffValue){
+                getData();
+           }
+        //    console.log(this.scrollTop)
+           if(this.scrollTop === 0){
+               list.style.top = "80px";
+               loading.style.top = "40px";
+               setTimeout(()=>{
+                  list.style.top = "40px";
+                  loading.style.top = "0";
+               },1000)
+           }
+        })
+    }
+</script>
+</html>

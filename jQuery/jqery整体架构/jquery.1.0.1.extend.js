@@ -10,6 +10,7 @@
       console.log('this.css')
     }
   }
+  // jQuery.fn.extend 扩展对象方法
   jQuery.fn.extend = jQuery.extend = function () {
     var target = arguments[0] || {};
     var length = arguments.length;
