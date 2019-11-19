@@ -9,8 +9,11 @@
 </head>
 
 <body>
-  <a href="" class="class_a"></a>
+  <a href="" class="class_a" id="a">ssssssssssss</a>
+  <p class="class_a" id="p">ssssssssssss</p>s
 
+  <!-- <script src="./jquery.1.0.1.callbacks.js"></script> -->
+  <script src="./index.js"></script>
   <script src="./jquery.1.0.1.selector.js"></script>
   <script>
     // const $1 = new $()
@@ -21,14 +24,56 @@
     // console.log($.name1)
     // var obj = $.extend(true, { name1: 'lxp' }, { name1: 'lliixxpp', age: ['20'], list: { mm: 211, aa: [111] } })
     // console.log(obj)
-    console.log($('a'))
-    console.log($('.class_a'))
-    console.log($(function () { console.log('cccc') }))
+    // console.log($('a'))
+    // console.log($('.class_a'))
+    // console.log($(function () {
+    //   console.log('cccc')
+    //   var aa = document.getElementById('a')
+    // }))
+    // var cb = _.callbacks("once  memery");
+    // cb.add(function () {
+    //   console.log(11)
+    // })
+    // cb.add(function () {
+    //   console.log(12)
+    // })
+    // cb.add(function () {
+    //   console.log(12)
+    // })
+    // cb.fire()
+    // cb.add(function () {
+    //   console.log(1111)
+    // })
+    // cb.add(function () {
+    //   console.log(2222)
+    // })
+    window.onload = function () {
+      console.log('BBBB')
+    }
+    console.log($('#p').text('ddddddd'))
+    $('#p').css('color', 'red')
+    console.log($('#p').css('color'))
 
-    var obj = $.extend(true, { name1: 'lxp' }, { name1: 'lliixxpp', age:{aaa: ['20']} , list: { mm: 211 } })
+    var obj = $.extend(true, { name1: 'lxp' }, { name1: 'lliixxpp', age: { aaa: ['20'] }, list: { mm: 211 } })
     console.log(obj)
-
   </script>
+  <script>
+    var x = 2;
+    var y = 0;
+    var z = 0;
+    function add(n) {
+      return n = n + 1
+    }
+    y = add(x)
+    function add(n) {
+      return n = n + 3
+    }
+    z = add(x)
+    s = y + z
+  </script>
+
+
+
 </body>
 
 </html>
