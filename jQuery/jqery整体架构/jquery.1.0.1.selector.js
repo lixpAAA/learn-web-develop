@@ -54,6 +54,12 @@
       console.log('this.css')
     }
   }
+  // 缓存用户数据
+  var data_user = new Data()
+  // 内部私有缓存对象
+  var data_private = new Data()
+
+  function Data() { }
 
   // jQuery.fn.extend 扩展对象方法
   jQuery.fn.extend = jQuery.extend = function () {
@@ -495,6 +501,10 @@
       } else {
         return ''
       }
+    },
+    // 动画队列
+    queue: function (elem, type, data) {
+      var queu
 
     }
   })
@@ -510,6 +520,27 @@
         let style = window.getComputedStyle(this[0])
         return value !== undefined ? jQuery.style(this, key, value) : style[key]
       }, null, value)
+    },
+    addClass: function (values) {
+      var len = this.length
+      var process = typeof values === 'string' && values
+      var classList = (values || '').match(/\S+/g) || []
+      if (process) {
+        for (var i = 0; i < len; ++i) {
+          var elem = this[i]
+          for (var j = 0; j < classList.length; ++j) {
+            var classListStr = toString.call(elem.classList)
+            var classItem = classList[j]
+            if (elem.classList && !classListStr.includes(classItem)) {
+              elem.classList.add(classItem)
+            }
+          }
+
+
+
+
+        }
+      }
     }
   })
 
