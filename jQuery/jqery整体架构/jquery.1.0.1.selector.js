@@ -509,6 +509,57 @@
     }
   })
   jQuery.fn.extend({
+    // // {
+    //   name: {
+    //       test: //
+    //       success: function(){},
+    //       fail: function(){}
+    //   }
+    // }
+    validate: function (options) {
+      if (!options) return
+      for (var type in options) {
+        var inputA = document.querySelectorAll(`input[name=${type}]`)
+        var inputs = inputA && Array.from(inputA)
+        inputs.forEach((item, index) => {
+          var value = item.value
+          var flag = options[type].test.test(value)
+          flag ? options[type].success(item, value) : options[type].fail(item, value)
+        })
+      }
+    },
+
+    // 在img父容器上挂载此方法
+    loadImg: function () {
+      // 获取父容器下的所有img
+      var imgs = document.querySelectorAll('img[data-src]') || []
+      var list = Array.from(imgs)
+      // console.log(list.length)
+      // 定义事件并判断img是否进入可视区域
+      var onScroll = function () {
+        var scrollY = window.scrollY
+        var heght = window.innerHeight
+        if (list.length > 0) {
+          // 存放处理过的index
+          var indexs = []
+          var len = list.length
+          for (var i = 0; i < len; ++i) {
+            var img = list[i]
+            // debugger
+            if (img.offsetTop - scrollY < heght) {
+              img.src = img.dataset['src']
+              img.dataset['src'] = ''
+              indexs.push(i)
+            }
+          }
+          // 删除已处理的
+          list.splice(0, indexs.length)
+        }
+      }
+      // 添加滚动事件
+      window.addEventListener('scroll', onScroll)
+      onScroll()
+    },
     text: function (value) {
       return jQuery.access(this, () => {
         return value === undefined ? jQuery.text(this[0]) : jQuery.content(this[0], value)
@@ -535,10 +586,6 @@
               elem.classList.add(classItem)
             }
           }
-
-
-
-
         }
       }
     }

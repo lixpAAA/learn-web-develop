@@ -6,14 +6,30 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
+  <style>
+    img {
+      width: 100px;
+      height: 200px;
+    }
+  </style>
 </head>
 
 <body>
   <a href="" class="class_a" id="a">ssssssssssss</a>
-  <p class="" id="p">ssssssssssss</p>
-
+  <div id="p">
+    <img data-src='https://p3.ssl.qhimgs1.com/bdr/665__/t010970d8e825a93209.jpg'
+      src='https://desk-fd.zol-img.com.cn/g5/M00/07/0F/ChMkJ1afJZGIBHxNAAs6mSLqeyIAAHe8ADsV7MACzqx051.jpg' />
+    <img data-src='https://p3.ssl.qhimgs1.com/bdr/665__/t010970d8e825a93209.jpg'
+      src='https://desk-fd.zol-img.com.cn/g5/M00/07/0F/ChMkJ1afJZGIBHxNAAs6mSLqeyIAAHe8ADsV7MACzqx051.jpg' />
+  </div>
+  <form method="get">
+    <p>First name: <input type="text" name="fname" /></p>
+    <p>Last name: <input type="text" name="lname" /></p>
+    <input type="button" value="Submit" onclick="nnn()" />
+  </form>
   <!-- <script src="./jquery.1.0.1.callbacks.js"></script> -->
   <script src="./index.js"></script>
+  <!-- <script src="./jquery.js"></script> -->
   <script src="./jquery.1.0.1.selector.js"></script>
   <script>
     // const $1 = new $()
@@ -56,7 +72,27 @@
 
     // var obj = $.extend(true, { name1: 'lxp' }, { name1: 'lliixxpp', age: { aaa: ['20'] }, list: { mm: 211 } })
     // console.log(obj)
-    $('#p').addClass('red vvv')
+    // $('#p').addClass('red vvv')
+    // $('#p').loadImg()
+    // $.fn.extend({
+
+    // })
+    $('#p').loadImg()
+
+    function nnn() {
+      $('form').validate({
+        'fname': {
+          test: /^[1-9]([0-9])*/,
+          success: function (ite, value) {
+            console.log('验证成功', value)
+          },
+          fail: function (ite, value) {
+            console.log('验证失败', value)
+          }
+        }
+      })
+      console.log(1111111111)
+    }
   </script>
   <script>
     var x = 2;
